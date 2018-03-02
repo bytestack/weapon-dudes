@@ -6,7 +6,7 @@ package com.trivadis.blockchain.rest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.PutMapping;
 
 /**
  * @author Marco Facetti
@@ -14,10 +14,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class WeaponTransactionController {
 
-    @ResponseBody
     @GetMapping("/transactions")
     public String getAllWeaponTransactions() {
-        return "test";
+
+        return "transactions/list";
     }
 
     @PostMapping("/transactions")

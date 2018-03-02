@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head :: head"></head>
+<body>
+
+<script type="application/javascript">
+
+    $(document).ready(function () {
+        $('#transactions').DataTable({
+            stateSave: true
+        });
+    });
+
+</script>
+
+<div th:replace="fragments/navbar :: navbar"></div>
+
+<div class="container-fluid">
+
+    <h1 th:text="Weapon Transactions"></h1>
+    <br/>
+    <br/>
+
+    <table id="transactions" class="table table-bordered table-responsive">
+        <thead>
+        <tr>
+            <th></th>
+            <th>Benutzername</th>
+            <th>Name</th>
+            <th>Vorname</th>
+            <th>Funktion</th>
+            <th>Telefon</th>
+            <th>Mobil</th>
+            <th>E-Mail</th>
+        </tr>
+        </thead>
+
+    </table>
+</div>
+
+</body>
+</html>
