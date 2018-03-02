@@ -19,7 +19,7 @@ public class WeaponTransactionController {
         return "test";
     }
 
-    @PostMapping
+    @PostMapping("/transactions")
     public String putWeaponTransaction() {
 
         return "redirect:/transactions";
