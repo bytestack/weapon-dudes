@@ -10,7 +10,19 @@ import java.util.List;
  */
 public class Weapon {
 
+    private String serialNumber;
+
     private List<WeaponTransaction> transactions;
+
+
+    public String getSerialNumber() {
+        return serialNumber;
+    }
+
+    public void setSerialNumber(String serialNumber) {
+        this.serialNumber = serialNumber;
+    }
+
 
     public List<WeaponTransaction> getTransactions() {
         return transactions;
