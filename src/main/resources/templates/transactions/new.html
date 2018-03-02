@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:replace="fragments/head :: head"></div>
+<body>
+
+<div th:replace="fragments/navbar :: navbar"></div>
+
+
+<div class="container">
+
+    <h1 th:text="'New Weapon Transaction'"></h1>
+
+    <a th:href="@{/transactions/new}" th:text="'Add new Transactions'" class="btn btn-lg btn-primary"/>
+
+    <form action="#" th:action="@{/users}" th:object="${dto}" method="post">
+
+        <br/>
+        <br/>
+        <br/>
+
+        <input type="submit" class="btn btn-lg btn-primary" value="Execute"/>
+        <a th:href="@{/transactions}" class="btn btn-lg btn-default" th:text="Cancel"/>
+
+
+    </form>
+
+    <br/>
+
+</div>
+</body>
+</html>

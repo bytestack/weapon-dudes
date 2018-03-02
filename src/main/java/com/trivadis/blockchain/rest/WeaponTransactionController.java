@@ -20,6 +20,12 @@ public class WeaponTransactionController {
         return "transactions/list";
     }
 
+    @GetMapping("/transactions/new")
+    public String getNewWeaponTransaction() {
+
+        return "transactions/new";
+    }
+
     @PostMapping("/transactions")
     public String putWeaponTransaction() {
 
