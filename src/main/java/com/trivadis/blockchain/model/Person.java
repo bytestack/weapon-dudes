@@ -1,18 +1,13 @@
 package com.trivadis.blockchain.model;
 
 
+import lombok.Data;
+
 /**
  * @author Marco Facetti
  */
+@Data
 public class Person {
 
     private String weaponRegisterNumber;
-
-    public String getWeaponRegisterNumber() {
-        return weaponRegisterNumber;
-    }
-
-    public void setWeaponRegisterNumber(String weaponRegisterNumber) {
-        this.weaponRegisterNumber = weaponRegisterNumber;
-    }
 }

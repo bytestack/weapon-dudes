@@ -17,7 +17,6 @@ public class WeaponTransactionController {
     @ResponseBody
     @GetMapping("/transactions")
     public String getAllWeaponTransactions() {
-
         return "test";
     }
 
