@@ -12,4 +12,11 @@ public class Weapon {
 
     private List<WeaponTransaction> transactions;
 
+    public List<WeaponTransaction> getTransactions() {
+        return transactions;
+    }
+
+    public void setTransactions(List<WeaponTransaction> transactions) {
+        this.transactions = transactions;
+    }
 }

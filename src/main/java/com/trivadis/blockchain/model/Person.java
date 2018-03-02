@@ -1,10 +1,18 @@
 package com.trivadis.blockchain.model;
-/*
- * (C) Copyright 2015-2017 Trivadis AG. All rights reserved.
- */
+
 
 /**
  * @author Marco Facetti
  */
 public class Person {
+
+    private String weaponRegisterNumber;
+
+    public String getWeaponRegisterNumber() {
+        return weaponRegisterNumber;
+    }
+
+    public void setWeaponRegisterNumber(String weaponRegisterNumber) {
+        this.weaponRegisterNumber = weaponRegisterNumber;
+    }
 }
