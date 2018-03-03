@@ -11,7 +11,10 @@ import com.trivadis.blockchain.dto.CtorMsg;
 import com.trivadis.blockchain.dto.Params;
 import com.trivadis.blockchain.model.Person;
 import com.trivadis.blockchain.model.Weapon;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,6 +29,8 @@ import java.util.Arrays;
  */
 @Controller
 public class WeaponTransactionController {
+
+    final static Logger log = LoggerFactory.getLogger(WeaponTransactionController.class);
 
     public static final String HOST = "http://localhost:7050";
     public static final String CHAINCODE_ENDPOINT = "/chaincode";
@@ -52,7 +57,9 @@ public class WeaponTransactionController {
 
         ChainDto chainDto = buildChainDtoObject(seller, buyer, weapon);
 
-        restTemplate.postForObject(HOST + CHAINCODE_ENDPOINT, chainDto, ChainDto.class);
+        ResponseEntity<String> stringResponseEntity = restTemplate.postForEntity(HOST + CHAINCODE_ENDPOINT, chainDto, String.class);
+
+        log.info("Status: " + stringResponseEntity.getStatusCode().toString());
 
         return "redirect:/transactions";
     }
@@ -66,7 +73,7 @@ public class WeaponTransactionController {
 
         CtorMsg ctorMsg = new CtorMsg();
         ctorMsg.setArgs(new ArrayList<>(Arrays.asList(
-                seller.getWeaponRegisterNumber(),
+                "put",
                 buyer.getWeaponRegisterNumber(),
                 transaktionJson
         )));
@@ -74,6 +81,7 @@ public class WeaponTransactionController {
         Params params = new Params();
         params.setChaincodeID(chaincodeID);
         params.setCtorMsg(ctorMsg);
+        params.setType(1);
 
         ChainDto chainDto = new ChainDto();
         chainDto.setId(1);
