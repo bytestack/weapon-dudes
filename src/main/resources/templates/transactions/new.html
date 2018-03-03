@@ -11,7 +11,13 @@
 
     <a th:href="@{/transactions/new}" th:text="'Add new Transactions'" class="btn btn-lg btn-primary"/>
 
-    <form action="#" th:action="@{/users}" th:object="${dto}" method="post">
+    <form action="#" th:action="@{/transactions}" th:object="${weaponTransaction}" method="post">
+
+        <input type="text" th:field="*{buyerWeaponRegisterNumber}" />
+
+        <input type="text" th:field="*{sellerWeaponRegisterNumber}" />
+
+        <input type="text" th:field="*{weaponSerialNumber}" />
 
         <input type="submit" class="btn btn-lg btn-primary" value="Execute"/>
         <a th:href="@{/transactions}" class="btn btn-lg btn-default" th:text="Cancel"/>

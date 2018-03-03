@@ -13,6 +13,7 @@ import com.trivadis.blockchain.model.Person;
 import com.trivadis.blockchain.model.Weapon;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.client.RestTemplate;
@@ -38,7 +39,8 @@ public class WeaponTransactionController {
     }
 
     @GetMapping("/transactions/new")
-    public String getNewWeaponTransaction() {
+    public String getNewWeaponTransaction(Model model) {
+        model.addAttribute("weaponTransaction", new WeaponTransactionDto());
 
         return "transactions/new";
     }
