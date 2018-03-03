@@ -9,9 +9,9 @@ import com.trivadis.blockchain.dto.ChainDto;
 import com.trivadis.blockchain.dto.ChaincodeID;
 import com.trivadis.blockchain.dto.CtorMsg;
 import com.trivadis.blockchain.dto.Params;
-import com.trivadis.blockchain.model.Person;
 import com.trivadis.blockchain.model.Weapon;
 import com.trivadis.blockchain.model.WeaponTransaction;
+import com.trivadis.blockchain.service.WeaponService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +24,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.client.RestTemplate;
 
-import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -42,7 +41,10 @@ public class WeaponTransactionController {
     public static final String CHAINCODE_ID = "weapondudes";
 
     @Autowired
-    RestTemplate restTemplate;
+    private RestTemplate restTemplate;
+
+    @Autowired
+    private WeaponService weaponService;
 
     @GetMapping("/transactions")
     public String getAllWeaponTransactions() {
@@ -68,28 +70,23 @@ public class WeaponTransactionController {
         return "redirect:/transactions";
     }
 
-    static ChainDto buildChainDtoObject(@ModelAttribute WeaponTransactionDto weaponTransactionDto) throws JsonProcessingException {
+    ChainDto buildChainDtoObject(@ModelAttribute WeaponTransactionDto weaponTransactionDto) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
 
         // FIXME load existing weapon from blockchain
         Weapon weapon = new Weapon();
 
-        List<WeaponTransaction> transactions = weapon.getTransactions();
-        if (!CollectionUtils.isEmpty(transactions)) {
-            // check if weapon belong the the seller of the transaction
-            if (weaponTransactionDto.getSellerWeaponRegisterNumber().equals(transactions.get(transactions.size() - 1).getBuyer().getWeaponRegisterNumber())) {
-                // create and add new weapon transaction
-                WeaponTransaction newWeaponTx = createNewWeaponTransaction(weaponTransactionDto);
-                transactions.add(newWeaponTx);
-
-                // TODO save the weapon to the blockchain
-
+        if (weaponService.weaponBelongsToOwner(weapon, weaponTransactionDto.getSellerWeaponRegisterNumber())) {
+            if (CollectionUtils.isEmpty(weapon.getTransactions())) {
+                // complete new weapon
+                weapon.setTransactions(new ArrayList<>());
             }
+
+            // create and add new weapon transaction
+            WeaponTransaction newWeaponTx = weaponService.createNewWeaponTransaction(weaponTransactionDto);
+            weapon.getTransactions().add(newWeaponTx);
         } else {
-            // complete new weapon
-            weapon.setTransactions(new ArrayList<>());
-
-
+            log.error("Weapon does not belong to buyer");
         }
 
         String transaktionJson = mapper.writeValueAsString(weapon);
@@ -117,12 +114,5 @@ public class WeaponTransactionController {
         return chainDto;
     }
 
-    private static WeaponTransaction createNewWeaponTransaction(@ModelAttribute WeaponTransactionDto weaponTransactionDto) {
-        WeaponTransaction newWeaponTx = new WeaponTransaction();
-        newWeaponTx.setSeller(Person.builder().weaponRegisterNumber(weaponTransactionDto.getSellerWeaponRegisterNumber()).build());
-        newWeaponTx.setBuyer(Person.builder().weaponRegisterNumber(weaponTransactionDto.getBuyerWeaponRegisterNumber()).build());
-        newWeaponTx.setTimestamp(OffsetDateTime.now());
-        return newWeaponTx;
-    }
 
 }
