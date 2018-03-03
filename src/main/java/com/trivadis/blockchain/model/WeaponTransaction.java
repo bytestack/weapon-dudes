@@ -14,4 +14,10 @@ import java.time.OffsetDateTime;
 public class WeaponTransaction {
 
     private OffsetDateTime timestamp;
+
+    private Person buyer;
+
+    private Person seller;
+
+
 }
