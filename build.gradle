@@ -71,6 +71,7 @@ dependencies {
     compile 'org.apache.httpcomponents:httpclient:4.5.3'
     compile 'org.springframework.boot:spring-boot-starter-web:1.5.9.RELEASE'
     compile 'org.springframework.boot:spring-boot-starter-thymeleaf:1.5.9.RELEASE'
+    testCompile 'org.springframework.boot:spring-boot-starter-test:1.5.9.RELEASE'
     compile 'org.webjars:bootstrap:3.3.7-1'
     compile 'org.webjars:datatables:1.10.15'
     compileOnly 'org.projectlombok:lombok:1.16.20'
