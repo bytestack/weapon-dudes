@@ -15,23 +15,22 @@
 
             <h1 th:text="'New Weapon Transaction'"></h1>
 
-            <form action="#" th:action="@{/users}" method="post">
-
+            <form action="#" th:action="@{/transactions}" th:object="${weaponTransaction}" method="post">
                 <div class="form-group">
                     <label for="weaponSerialNr">Weapon serial number</label>
-                    <input type="text" class="form-control" id="weaponSerialNr"
-                           placeholder="Enter weapon serial number..."/>
+                    <input type="text" class="form-control" id="weaponSerialNr" th:field="*{weaponSerialNumber}""
+                           placeholder=" Enter weapon serial number..."/>
                 </div>
 
                 <div class="form-group">
-                    <label for="weaponDocNrA">Weapon license number (Person A)</label>
-                    <input type="text" class="form-control" id="weaponDocNrA"
+                    <label for="weaponDocNrA">Weapon license number seller</label>
+                    <input type="text" class="form-control" id="weaponDocNrA" th:field="*{sellerWeaponRegisterNumber}"
                            placeholder="Enter weapon license number..."/>
                 </div>
 
                 <div class="form-group">
-                    <label for="weaponDocNrB">Weapon license number (Person B)</label>
-                    <input type="text" class="form-control" id="weaponDocNrB"
+                    <label for="weaponDocNrB">Weapon license number buyer</label>
+                    <input type="text" class="form-control" id="weaponDocNrB" th:field="*{buyerWeaponRegisterNumber}"
                            placeholder="Enter weapon license number..."/>
                 </div>
 
