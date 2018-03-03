@@ -3,6 +3,7 @@ package com.trivadis.blockchain;
  * (C) Copyright 2015-2017 Trivadis AG. All rights reserved.
  */
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.trivadis.blockchain.helper.LoggingRequestInterceptor;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -32,6 +33,11 @@ public class Application {
         interceptors.add(new LoggingRequestInterceptor());
         restTemplate.setInterceptors(interceptors);
         return restTemplate;
+    }
+
+    @Bean
+    public ObjectMapper mapper() {
+        return new ObjectMapper();
     }
 
     public static void main(String[] args) {
