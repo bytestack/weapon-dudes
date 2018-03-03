@@ -44,7 +44,6 @@ public class WeaponTransactionControllerTest {
 
         //then
         assertThat(result, Matchers.equalTo("redirect:/transactions"));
-
     }
 
 
