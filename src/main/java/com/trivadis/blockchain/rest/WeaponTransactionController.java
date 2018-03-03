@@ -26,7 +26,6 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 /**
  * @author Marco Facetti
@@ -97,7 +96,7 @@ public class WeaponTransactionController {
         CtorMsg ctorMsg = new CtorMsg();
         ctorMsg.setArgs(new ArrayList<>(Arrays.asList(
                 "put",
-                weaponTransactionDto.getBuyerWeaponRegisterNumber(),
+                weaponTransactionDto.getWeaponSerialNumber(),
                 transaktionJson
         )));
 
@@ -113,6 +112,4 @@ public class WeaponTransactionController {
         chainDto.setParams(params);
         return chainDto;
     }
-
-
 }
