@@ -3,6 +3,7 @@ package com.trivadis.blockchain.model;
  * (C) Copyright 2015-2017 Trivadis AG. All rights reserved.
  */
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 import java.util.List;
@@ -12,8 +13,9 @@ import java.util.List;
  */
 @Data
 public class Weapon {
-
+    @JsonProperty
     private String serialNumber;
 
+    @JsonProperty
     private List<WeaponTransaction> transactions;
 }
