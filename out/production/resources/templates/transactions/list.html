@@ -14,22 +14,39 @@
 </script>
 
 <div class="container-fluid">
-    <div th:replace="fragments/navbar :: navbar"></div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div th:replace="fragments/navbar :: navbar"></div>
+        </div>
+    </div>
 
-    <h1 th:text="'Weapon Transactions'"></h1>
-
-    <table id="transactions" class="table table-bordered table-responsive">
-        <thead>
-        <tr>
-            <th></th>
-            <th>Weapon Serial Number</th>
-            <th>Seller Name</th>
-            <th>Buyer Name</th>
-            <th>Datetime</th>
-        </tr>
-        </thead>
-
-    </table>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="table-responsive">
+                <h1 th:text="'Weapon Transactions'"></h1>
+                <table id="transactionList" class="table table-bordered table-hover ">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Weapon serial number</th>
+                        <th scope="col"><span class="glyphicon glyphicon-user"></span> Weapon license number seller</th>
+                        <th scope="col"><span class="glyphicon glyphicon-user"></span> Weapon license number buyer</th>
+                        <th scope="col">Date and Time</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>2121134551</td>
+                        <td>2131313131</td>
+                        <td>654545645645</td>
+                        <td>2018-03-03 13:56</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>
 
 </body>
