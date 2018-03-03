@@ -27,8 +27,10 @@ import java.util.Arrays;
 @Controller
 public class WeaponTransactionController {
 
-    public static final String HOST = "http://localhost";
+    public static final String HOST = "http://localhost:7050";
     public static final String CHAINCODE_ENDPOINT = "/chaincode";
+    public static final String CHAINCODE_ID = "weapondudes";
+
     @Autowired
     RestTemplate restTemplate;
 
@@ -48,11 +50,19 @@ public class WeaponTransactionController {
     @PostMapping("/transactions")
     public String putWeaponTransaction(Person seller, Person buyer, Weapon weapon) throws JsonProcessingException {
 
+        ChainDto chainDto = buildChainDtoObject(seller, buyer, weapon);
+
+        restTemplate.postForObject(HOST + CHAINCODE_ENDPOINT, chainDto, ChainDto.class);
+
+        return "redirect:/transactions";
+    }
+
+    static ChainDto buildChainDtoObject(Person seller, Person buyer, Weapon weapon) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
         String transaktionJson = mapper.writeValueAsString(weapon);
 
         ChaincodeID chaincodeID = new ChaincodeID();
-        chaincodeID.setName("weapondudes");
+        chaincodeID.setName(CHAINCODE_ID);
 
         CtorMsg ctorMsg = new CtorMsg();
         ctorMsg.setArgs(new ArrayList<>(Arrays.asList(
@@ -70,9 +80,6 @@ public class WeaponTransactionController {
         chainDto.setJsonrpc("2.0");
         chainDto.setMethod("invoke");
         chainDto.setParams(params);
-
-        restTemplate.postForObject(HOST + CHAINCODE_ENDPOINT, chainDto, ChainDto.class);
-
-        return "redirect:/transactions";
+        return chainDto;
     }
 }
