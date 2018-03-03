@@ -12,6 +12,10 @@ public class BlockchainController extends ChaincodeBase {
 
     private static Log log = LogFactory.getLog(Example.class);
 
+    public BlockchainController() {
+        this.start(null);
+    }
+
     @Override
     public String run(ChaincodeStub stub, String function, String[] args) {
         log.info("In run, function:" + function);
