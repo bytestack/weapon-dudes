@@ -26,7 +26,6 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 /**
  * @author Marco Facetti
@@ -45,6 +44,9 @@ public class WeaponTransactionController {
 
     @Autowired
     private WeaponService weaponService;
+
+    @Autowired
+    private ObjectMapper mapper;
 
     @GetMapping("/transactions")
     public String getAllWeaponTransactions() {
@@ -71,8 +73,6 @@ public class WeaponTransactionController {
     }
 
     ChainDto buildChainDtoObject(@ModelAttribute WeaponTransactionDto weaponTransactionDto) throws JsonProcessingException {
-        ObjectMapper mapper = new ObjectMapper();
-
         // FIXME load existing weapon from blockchain
         Weapon weapon = new Weapon();
         weapon.setSerialNumber(weaponTransactionDto.getWeaponSerialNumber());
