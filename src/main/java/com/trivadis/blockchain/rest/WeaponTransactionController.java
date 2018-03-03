@@ -98,7 +98,7 @@ public class WeaponTransactionController {
         CtorMsg ctorMsg = new CtorMsg();
         ctorMsg.setArgs(new ArrayList<>(Arrays.asList(
                 "put",
-                weaponTransactionDto.getBuyerWeaponRegisterNumber(),
+                weaponTransactionDto.getWeaponSerialNumber(),
                 transaktionJson
         )));
 
@@ -114,6 +114,4 @@ public class WeaponTransactionController {
         chainDto.setParams(params);
         return chainDto;
     }
-
-
 }
