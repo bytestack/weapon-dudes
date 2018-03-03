@@ -75,6 +75,7 @@ public class WeaponTransactionController {
 
         // FIXME load existing weapon from blockchain
         Weapon weapon = new Weapon();
+        weapon.setSerialNumber(weaponTransactionDto.getWeaponSerialNumber());
 
         if (weaponService.weaponBelongsToOwner(weapon, weaponTransactionDto.getSellerWeaponRegisterNumber())) {
             if (CollectionUtils.isEmpty(weapon.getTransactions())) {
