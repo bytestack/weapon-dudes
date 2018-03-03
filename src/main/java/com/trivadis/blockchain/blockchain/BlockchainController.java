@@ -39,10 +39,10 @@ public class BlockchainController extends ChaincodeBase {
         System.out.println("Hello world! function:" + function);
         log.debug("query:" + args[0] + "=" + stub.getState(args[0]));
         if (stub.getState(args[0]) != null && !stub.getState(args[0]).isEmpty()) {
-            log.trace("returning: Hello world! from " + stub.getState(args[0]));
+            log.info("returning: Hello world! from " + stub.getState(args[0]));
             return "Hello world! from " + stub.getState(args[0]);
         } else {
-            log.debug("No value found for key '" + args[0] + "'");
+            log.info("No value found for key '" + args[0] + "'");
             return "Hello " + args[0] + "!";
         }
     }
