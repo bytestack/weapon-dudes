@@ -4,27 +4,42 @@
 <body>
 
 <div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            <div th:replace="fragments/navbar :: navbar"></div>
+        </div>
+    </div>
 
-    <div th:replace="fragments/navbar :: navbar"></div>
+    <div class="row">
+        <div class="col-lg-4">
 
-    <h1 th:text="'New Weapon Transaction'"></h1>
+            <h1 th:text="'New Weapon Transaction'"></h1>
 
-    <a th:href="@{/transactions/new}" th:text="'Add new Transactions'" class="btn btn-lg btn-primary"/>
+            <form action="#" th:action="@{/transactions}" th:object="${weaponTransaction}" method="post">
+                <div class="form-group">
+                    <label for="weaponSerialNr">Weapon serial number</label>
+                    <input type="text" class="form-control" id="weaponSerialNr" th:field="*{weaponSerialNumber}""
+                           placeholder=" Enter weapon serial number..."/>
+                </div>
 
-    <form action="#" th:action="@{/transactions}" th:object="${weaponTransaction}" method="post">
+                <div class="form-group">
+                    <label for="weaponDocNrA">Weapon license number seller</label>
+                    <input type="text" class="form-control" id="weaponDocNrA" th:field="*{sellerWeaponRegisterNumber}"
+                           placeholder="Enter weapon license number..."/>
+                </div>
 
-        <input type="text" th:field="*{buyerWeaponRegisterNumber}" />
+                <div class="form-group">
+                    <label for="weaponDocNrB">Weapon license number buyer</label>
+                    <input type="text" class="form-control" id="weaponDocNrB" th:field="*{buyerWeaponRegisterNumber}"
+                           placeholder="Enter weapon license number..."/>
+                </div>
 
-        <input type="text" th:field="*{sellerWeaponRegisterNumber}" />
+                <a th:href="@{/transactions/new}" th:text="'Add transactions'" class="btn btn-lg btn-primary"/>
+                <a th:href="@{/transactions}" class="btn btn-lg btn-danger" th:text="Cancel"/>
+            </form>
 
-        <input type="text" th:field="*{weaponSerialNumber}" />
-
-        <input type="submit" class="btn btn-lg btn-primary" value="Execute"/>
-        <a th:href="@{/transactions}" class="btn btn-lg btn-default" th:text="Cancel"/>
-
-    </form>
-
-    <br/>
+        </div>
+    </div>
 
 </div>
 </body>
